@@ -22,12 +22,12 @@ class StudentParent extends Model
     'email',
      'password'
   ];
-//   protected $hidden = [
-//     'password',
-//     'email_verified_at',
-//     'last_login_date',
-//     'deleted_at',
-//     'remember_token',
-//     'created_at',
-//   ];
+  protected $hidden = [
+    'password',
+    'email_verified_at',
+    'last_login_date',
+    'deleted_at',
+    'remember_token',
+    'created_at',
+  ];
 }
