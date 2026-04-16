@@ -4,7 +4,7 @@ import './App.css'
 import {router} from "./router/index.jsx"
 import { RouterProvider } from 'react-router-dom'
 import { ThemeProvider } from "./components/theme-provider"
-import { Toaster } from "./components/ui/toaster.jsx"
+// import { Toaster } from "./components/ui/toast.jsx"
 function App() {
 
 
@@ -19,7 +19,7 @@ function App() {
     </ThemeProvider>
 
      </UserContext>
-     <Toaster/>
+     {/* <Toaster/> */}
   
      </>
   )
