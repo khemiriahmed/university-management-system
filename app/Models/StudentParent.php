@@ -30,4 +30,8 @@ class StudentParent extends Model
     'remember_token',
     'created_at',
   ];
+
+    protected $casts = [
+    'date_of_birth' => 'date:Y-m-d',
+  ];
 }
