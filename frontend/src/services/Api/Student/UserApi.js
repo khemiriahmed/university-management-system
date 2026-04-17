@@ -5,7 +5,7 @@ const StudentApi = {
   },
 
   getUser: async () => {
-    return await axiosClient.get("/admin");
+    return await axiosClient.get("/me");
   },
 
   logout: async()=>{

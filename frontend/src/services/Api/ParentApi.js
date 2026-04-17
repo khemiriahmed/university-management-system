@@ -4,6 +4,11 @@ const ParentApi = {
     return await axiosClient.post("/admin/parents", payload );
   },
 
+    update: async (id,payload) => {
+   
+    return await axiosClient.put(`/admin/parents/${id}`, payload );
+  },
+
    delete: async (id) => {
     return await axiosClient.delete(`/admin/parents/${id}`);
   },

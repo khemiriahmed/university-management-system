@@ -9,6 +9,17 @@ import {DataTableColumnHeader} from "../DataTableColumnHeader"
 
 
 
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet"
+
 
 import {
   AlertDialog,
@@ -21,6 +32,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
+import ParentUpsertForm from "../../Forms/ParentUpsertForm";
 
 
 
@@ -108,10 +120,24 @@ export default function AdminParentsList(){
     id: "actions",
     cell: ({ row }) => {
       const {id,firstname,lastname } = row.original
-      
+         const [openUpdateDialog, setOpenUpdateDialog] = useState(false)
 
       return (
-      <>
+      <div className={'flex gap-x-1'} >
+
+      <Sheet  open={openUpdateDialog} onOpenChange={setOpenUpdateDialog}>
+  <SheetTrigger>
+    <Button size={'sm'} >Update </Button>
+  </SheetTrigger>
+  <SheetContent>
+    <SheetHeader>
+      <SheetTitle>Update parent {firstname},{lastname}</SheetTitle>
+      <SheetDescription>
+        <ParentUpsertForm values={row.original} handleSubmit={(values) => ParentApi.update(id,values).then(()=>setOpenUpdateDialog(false))}/>
+      </SheetDescription>
+    </SheetHeader>
+  </SheetContent>
+</Sheet>
 
       <AlertDialog>
   <AlertDialogTrigger asChild>
@@ -142,7 +168,7 @@ export default function AdminParentsList(){
   </AlertDialogContent>
 </AlertDialog>
       
-      </>
+      </div>
       )
     },
   },

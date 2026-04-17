@@ -6,6 +6,7 @@ use App\Models\StudentParent;
 use App\Http\Requests\StoreStudentParentRequest;
 use App\Http\Requests\UpdateStudentParentRequest;
 use App\Http\Resources\StudentParentResource;
+use Illuminate\Support\Facades\Hash;
 
 class StudentParentController extends Controller
 {
@@ -14,8 +15,8 @@ class StudentParentController extends Controller
      */
     public function index()
     {
-         return StudentParentResource::collection(StudentParent::all());
-       
+        return StudentParentResource::collection(StudentParent::all());
+
     }
 
     /**
@@ -24,10 +25,14 @@ class StudentParentController extends Controller
     public function store(StoreStudentParentRequest $request)
     {
         $formFields = $request->validated();
-        //var_dump($formFields);
         $formFields['last_login_date'] = new \DateTime();
+        $formFields['password'] = Hash::make($formFields['password']);
         $parent = StudentParent::create($formFields);
-        return new StudentParentResource($parent);
+         $response = new StudentParentResource($parent);
+        return response()->json([
+            'parent' => $response,
+            'message' => __('Parent created successfully')
+        ]);
     }
 
     /**
@@ -35,15 +40,23 @@ class StudentParentController extends Controller
      */
     public function show(StudentParent $studentParent)
     {
-        //
+        
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateStudentParentRequest $request, StudentParent $studentParent)
+    public function update(UpdateStudentParentRequest $request, StudentParent $parent)
     {
-        //
+
+        $formFields = $request->validated();
+        $formFields['password'] = Hash::make($formFields['password']);
+        $parent->update($formFields);
+
+          return response()->json([
+            'parent' => $parent,
+            'message' => __('Parent updated successfully')
+        ]);
     }
 
     /**
@@ -51,8 +64,8 @@ class StudentParentController extends Controller
      */
     public function destroy(StudentParent $parent)
     {
-        //$studentParent->delete();
+        $parent->delete();
         return new StudentParentResource($parent);
-}
+    }
 
 }

@@ -7,12 +7,11 @@ import {Separator} from "../ui/separator.jsx";
 import {ScrollArea, ScrollBar} from "../ui/scroll-area.jsx";
 import { PlusCircle } from "lucide-react";
 import { Button } from "../ui/button.jsx";
-import ParentCreate from "../Forms/ParentCreate.jsx";
+import ParentUpsertForm from "../Forms/ParentUpsertForm.jsx";
 import AdminParentsList from "../data-table/parent/AdminParentsList.jsx";
+import ParentApi from "../../services/Api/ParentApi.js";
 
-//import ParentUpsertForm from "../Forms/ParentUpsertForm.jsx";
-//import AdminParentList from "../data-table/AdminParentList.jsx";
-// import ParentApi from "../../../services/Api/Admin/ParentApi.js";
+
 
 
 export default function ManageParents() {
@@ -63,7 +62,7 @@ export default function ManageParents() {
                     <TabsContent
                       value="add_parent">
                       <div className="space-y-1">
-                       <ParentCreate/>
+                       <ParentUpsertForm handleSubmit={(values) => ParentApi.create(values)}/>
                       </div>
                       <Separator className="my-4"/>
                     </TabsContent>
