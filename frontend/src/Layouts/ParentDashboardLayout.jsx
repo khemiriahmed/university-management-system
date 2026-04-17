@@ -4,12 +4,13 @@ import { useEffect } from "react"
 import {useUserContext} from "../context/StudentContext.jsx";
 import StudentApi from "../services/Api/Student/UserApi.js";
 import { Button } from "../components/ui/button.jsx";
-import StudentDropDownMenu from "./DropDownStudent/StudentDropdownMenu.jsx"
-import AdminAdminstrationSideBar from "./Adminstration/AdminAdminstrationSidebar.jsx"
+import ParentDropDownMenu from "./DropDownStudent/ParentDropdownMenu.jsx"
+
 
 import { Gauge } from "lucide-react";
 import { ModeToggle } from "../components/mode-toggle.jsx";
-import AdminDropDownMenu from "./DropDownStudent/AdminDropdownMenu.jsx";
+import ParentAdminstrationSidebar from "./Adminstration/ParentAdminstrationSidebar.jsx";
+
 
 
 export default function AdminDashboardLayout() {
@@ -62,7 +63,7 @@ export default function AdminDashboardLayout() {
               <Link className="" to={'/users'}> users</Link>
             </li>
             <li className="ml-5 px-2 py-1">
-            <AdminDropDownMenu/>
+            <ParentDropDownMenu/>
             </li>
 
             <li className="ml-5 px-2 py-1">
@@ -80,7 +81,7 @@ export default function AdminDashboardLayout() {
       <main className="mx-auto px-10 space-y-4 py-4">
        <div className="flex">
         <div className="w-100 md:w-2/12 border mr-2 rounded-l">
-          <AdminAdminstrationSideBar/>
+          <ParentAdminstrationSidebar/>
         </div>
 
          <div className="w-100 md:w-10/12 border rounded-l">

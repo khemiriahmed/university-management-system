@@ -2,9 +2,9 @@ import {   Link , Outlet, useNavigate} from "react-router-dom"
 import {LOGIN_ROUTE, STUDENT_DASHBOARD_ROUTE} from "../router/index"
 import { useEffect } from "react"
 import {useUserContext} from "../context/StudentContext.jsx";
-import StudentApi from "../services/Api/Student/StudentApi.js";
+import StudentApi from "../services/Api/Student/UserApi.js";
 import { Button } from "../components/ui/button.jsx";
-import StudentDropDownMenu from "./StudentDropdownMenu.jsx"
+import StudentDropDownMenu from "./DropDownStudent/StudentDropdownMenu.jsx"
 import StudentAdminstrationSideBar from "./Adminstration/StudentAdminstrationSidebar.jsx"
 
 import { Gauge } from "lucide-react";

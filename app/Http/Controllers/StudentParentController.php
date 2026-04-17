@@ -6,6 +6,7 @@ use App\Models\StudentParent;
 use App\Http\Requests\StoreStudentParentRequest;
 use App\Http\Requests\UpdateStudentParentRequest;
 use App\Http\Resources\StudentParentResource;
+use Illuminate\Support\Facades\Hash;
 
 class StudentParentController extends Controller
 {
@@ -24,8 +25,8 @@ class StudentParentController extends Controller
     public function store(StoreStudentParentRequest $request)
     {
         $formFields = $request->validated();
-        //var_dump($formFields);
         $formFields['last_login_date'] = new \DateTime();
+        $formFields['password'] = Hash::make($formFields['password']);
         $parent = StudentParent::create($formFields);
          $response = new StudentParentResource($parent);
         return response()->json([
@@ -47,12 +48,15 @@ class StudentParentController extends Controller
      */
     public function update(UpdateStudentParentRequest $request, StudentParent $parent)
     {
-        $parent->update($request->validated());
 
-        //   return response()->json([
-        //     'parent' => $parent,
-        //     'message' => __('Parent updated successfully')
-        // ]);
+        $formFields = $request->validated();
+        $formFields['password'] = Hash::make($formFields['password']);
+        $parent->update($formFields);
+
+          return response()->json([
+            'parent' => $parent,
+            'message' => __('Parent updated successfully')
+        ]);
     }
 
     /**

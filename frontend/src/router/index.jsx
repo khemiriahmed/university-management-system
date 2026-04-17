@@ -9,8 +9,9 @@ import Users from "../pages/Users";
 import StudentDashboardLayout from "../Layouts/StudentDashboardLayout";
 import StudentDashboard from "../components/Student/StudentDashboard";
 import AdminDashboard from "../components/Admin/AdminDashboard";
-import AdminDashboardLayout from "../Layouts/AdminDashboardLayout";
 import ManageParents from "../components/Admin/ManageParents";
+import AdminDashboardLayout from "../Layouts/AdminDashboardLayout";
+import ParentDashboardLayout from "../Layouts/ParentDashboardLayout";
 
 export const LOGIN_ROUTE = "/login";
 
@@ -18,6 +19,7 @@ const ADMIN_BASE_ROUTE = '/admin'
 export const ADMIN_DASHBOARD_ROUTE = ADMIN_BASE_ROUTE+'/dashboard' 
 export const ADMIN_MANAGE_PARENTS_ROUTE = ADMIN_BASE_ROUTE+'/manage-parents' 
 export const STUDENT_DASHBOARD_ROUTE = "/student/dashboard";
+export const PARENT_DASHBOARD_ROUTE = "/parent/dashboard";
 
 // export const TEACHER_DASHBOARD_ROUTE = "/admin/dashboard";
 export const router = createBrowserRouter([
@@ -77,6 +79,17 @@ export const router = createBrowserRouter([
           path: ADMIN_MANAGE_PARENTS_ROUTE,
           element:<ManageParents/>,
       },
+    ],
+  },
+
+      {
+    element: <ParentDashboardLayout />,
+    children: [
+      {
+          path: PARENT_DASHBOARD_ROUTE,
+          element:<AdminDashboard/>,
+      },
+          
     ],
   },
 ]);

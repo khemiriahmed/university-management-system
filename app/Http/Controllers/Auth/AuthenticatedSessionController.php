@@ -44,6 +44,16 @@ class AuthenticatedSessionController extends Controller
         ]);
     }
 
+           // Essayer user (parent)
+    if (Auth::guard('parent')->attempt($credentials)) {
+        $user = Auth::guard('parent')->user();
+        $token = $user->createToken('auth_token',[$user->getRoleAttribute()])->plainTextToken;
+        return response()->json([
+            'token' => $token,
+            'role' => 'parent'
+        ]);
+    }
+
      return response()->json([
         'message' => 'Invalid credentials'
     ], 401);
