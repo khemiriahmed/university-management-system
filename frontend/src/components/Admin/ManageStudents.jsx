@@ -7,14 +7,14 @@ import {Separator} from "../ui/separator.jsx";
 import {ScrollArea, ScrollBar} from "../ui/scroll-area.jsx";
 import { PlusCircle } from "lucide-react";
 import { Button } from "../ui/button.jsx";
-import ParentUpsertForm from "../Forms/ParentUpsertForm.jsx";
-import AdminParentsList from "../data-table/AdminParentsList.jsx";
-import ParentApi from "../../services/Api/ParentApi.js";
+import StudentUpsertForm from "../Forms/StudentUpsertForm.jsx";
+import StudentsList from "../data-table/StudentsList.jsx";
+import StudentApi from "../../services/Api/StudentApi.js";
 
 
 
 
-export default function ManageParents() {
+export default function ManageStudents() {
    const { user} = useUserContext()
   return (
     <>  
@@ -25,29 +25,29 @@ export default function ManageParents() {
             <div className="grid">
               <div className="col-span-3 lg:col-span-4">
                 <div className="h-full px-4 py-6 lg:px-8">
-                  <Tabs defaultValue="parents_list" className="h-full space-y-6">
+                  <Tabs defaultValue="items_list" className="h-full space-y-6">
                     <div className="space-between flex items-center">
                       <TabsList>
-                        <TabsTrigger value="parents_list" className="relative">Parents</TabsTrigger>
-                        <TabsTrigger value="add_parent">Add new parent</TabsTrigger>
+                        <TabsTrigger value="parents_list" className="relative">Student</TabsTrigger>
+                        <TabsTrigger value="add_item">Add new student</TabsTrigger>
                       </TabsList>
                       <div className="ml-auto mr-4 ">
                         <Button>
                           <PlusCircle className="mr-2 h-4 w-4"/>
-                          Add parent 
+                          Add student 
                         </Button>
                       </div>
                     </div>
                     <TabsContent
-                      value="parents_list"
+                      value="items_list"
                       className="border-none p-0 outline-none"
                     >
                       <div className="flex items-center justify-between">
                         <div className="space-y-1 w-full">
                           <h2 className="text-2xl font-semibold tracking-tight">
-                            All parents
+                            All student
                           </h2>
-                          <AdminParentsList/>
+                          <StudentsList/>
                         </div>
                       </div>
                       <Separator className="my-4"/>
@@ -60,9 +60,9 @@ export default function ManageParents() {
                       </div>
                     </TabsContent>
                     <TabsContent
-                      value="add_parent">
+                      value="add_item">
                       <div className="space-y-1">
-                       <ParentUpsertForm handleSubmit={(values) => ParentApi.create(values)}/>
+                       <StudentUpsertForm handleSubmit={(values) => StudentApi.create(values)}/>
                       </div>
                       <Separator className="my-4"/>
                     </TabsContent>

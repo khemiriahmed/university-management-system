@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\StudentParentController;
+use App\Http\Controllers\StudentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +30,8 @@ Route::middleware(['auth:sanctum', 'ability:student'])->prefix('student')->group
 
 Route::middleware(['auth:sanctum', 'ability:admin'])->prefix('admin')->group(static function () {
     Route::apiResources([
-        'parents' => StudentParentController::class
+        'parents' => StudentParentController::class,
+        'students' => StudentController::class
     ]);
 
 

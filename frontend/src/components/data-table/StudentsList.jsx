@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { DataTable } from "../DataTable";
+import { DataTable } from "./DataTable";
 
-import ParentApi from "../../../services/Api/ParentApi";
+import StudentApi from "../../services/Api/StudentApi";
 
-import { Button } from "../../ui/button";
+import { Button } from "../ui/button";
 import { ArrowUpDown,MoreHorizontal } from "lucide-react";
-import {DataTableColumnHeader} from "../DataTableColumnHeader"
+import {DataTableColumnHeader} from "./DataTableColumnHeader"
 
 
 
@@ -32,15 +32,16 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
-import ParentUpsertForm from "../../Forms/ParentUpsertForm";
+import StudentUpsertForm from "../Forms/StudentUpsertForm";
 
 
 
 
-export default function AdminParentsList(){
+
+export default function StudentsList(){
     const [data,setData] = useState([])
 
-     const AdminParentsColumns = [
+     const studentColumns = [
     {
       accessorKey: "id",
       header: ({column}) => {
@@ -53,17 +54,10 @@ export default function AdminParentsList(){
         return <DataTableColumnHeader column={column} title="Firstname"/>
       },
     },
-
     {
       accessorKey: "lastname",
       header: ({column}) => {
         return <DataTableColumnHeader column={column} title="Lastname"/>
-      },
-    },
-    {
-      accessorKey: "date_of_birth",
-      header: ({column}) => {
-        return <DataTableColumnHeader column={column} title="Date of birth"/>
       },
     },
     {
@@ -84,22 +78,6 @@ export default function AdminParentsList(){
       },
     },
     {
-      accessorKey: "address",
-      header: ({column}) => {
-        return <DataTableColumnHeader column={column} title="Address"/>
-      },
-    },
-    {
-      accessorKey: "phone",
-      header: ({column}) => {
-        return <DataTableColumnHeader column={column} title="Phone"/>
-      },
-      cell: ({row}) => {
-        const phone = row.getValue("phone")
-        return <div className="text-right font-medium">+212-{phone}</div>
-      },
-    },
-    {
       accessorKey: "email",
       header: ({column}) => {
         return <DataTableColumnHeader column={column} title="Email"/>
@@ -112,6 +90,8 @@ export default function AdminParentsList(){
       },
       cell: ({row}) => {
         const date = (row.getValue("formatted_updated_at"))
+        // const formatted = new Date(date).toString()
+
         return <div className="text-right font-medium">{date}</div>
       },
     },
@@ -131,9 +111,24 @@ export default function AdminParentsList(){
   </SheetTrigger>
   <SheetContent>
     <SheetHeader>
-      <SheetTitle>Update parent {firstname},{lastname}</SheetTitle>
+      <SheetTitle>Update Student {firstname},{lastname}</SheetTitle>
       <SheetDescription>
-        <ParentUpsertForm values={row.original} handleSubmit={(values) => ParentApi.update(id,values).then(()=>setOpenUpdateDialog(false))}/>
+        <StudentUpsertForm values={row.original} handleSubmit={(values) => {
+                      const promise = StudentApi.update(id, values)
+                      promise.then((response) => {
+                        const {student} = response.data
+                        const elements = data.map((item) => {
+                          if(item.id === id) {
+                            return student
+                          }
+                          return item
+                        })
+                        setData(elements)
+                        setOpenUpdateDialog(false);
+                      });
+
+                      return promise
+                    }}/>
       </SheetDescription>
     </SheetHeader>
   </SheetContent>
@@ -154,10 +149,10 @@ export default function AdminParentsList(){
     <AlertDialogFooter>
       <AlertDialogCancel>Cancel</AlertDialogCancel>
       <AlertDialogAction onClick={async()=>{
-        const {data:deletedParent, status} = await ParentApi.delete(id);
+        const {data:deletedStudent, status} = await StudentApi.delete(id);
         if(status === 200){
-            setData(data.filter((parent) => parent.id !== id))
-            console.log("Parent Deletes succesfully ${deletedParent.data.firstname}")
+            setData(data.filter((Student) => Student.id !== id))
+            console.log("Student Deletes succesfully ${deletedStudent.data.firstname}")
 
         }
         
@@ -178,10 +173,10 @@ export default function AdminParentsList(){
     
 ];
  useEffect(()=>{
-  ParentApi.all().then(({data})=> setData(data.data))
+  StudentApi.all().then(({data})=> setData(data.data))
  },[])
 
     return <>
-    <DataTable columns={AdminParentsColumns} data={data}/>
+    <DataTable columns={studentColumns} data={data}/>
     </>
 }

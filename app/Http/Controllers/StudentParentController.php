@@ -7,15 +7,18 @@ use App\Http\Requests\StoreStudentParentRequest;
 use App\Http\Requests\UpdateStudentParentRequest;
 use App\Http\Resources\StudentParentResource;
 use Illuminate\Support\Facades\Hash;
+use Symfony\Component\HttpFoundation\Request;
 
 class StudentParentController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        return StudentParentResource::collection(StudentParent::all());
+    public function index(Request $request)
+    { 
+        $columns = $request->get('columns');
+        $parents = !empty($columns) ? StudentParent::all($columns) : StudentParent::all();
+        return StudentParentResource::collection($parents);
 
     }
 

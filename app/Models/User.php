@@ -18,9 +18,16 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+
+        'firstname',
+        'lastname',
+        'date_of_birth',
+        'last_login_date',
+        'gender',
+        'blood_type',
+        'student_parent_id',
         'email',
-        'password',
+        'password'
     ];
 
     /**
@@ -34,7 +41,8 @@ class User extends Authenticatable
         'remember_token',
     ];
     protected $appends = ['role'];
-    public function getRoleAttribute(){
+    public function getRoleAttribute()
+    {
         return 'student';
     }
 
@@ -45,5 +53,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+         'date_of_birth' => 'date:Y-m-d',
     ];
+
 }

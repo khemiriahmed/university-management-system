@@ -22,7 +22,7 @@ export default function DefaultDropDownMenu({children}){
     return <>
  <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button> <UserIcon className="mr-2" />{user.name} || {user.firstname}</Button>
+        <Button> <UserIcon className="mr-2" /> {user.firstname}</Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         {children}
