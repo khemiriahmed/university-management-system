@@ -17,15 +17,15 @@ use App\Http\Controllers\StudentController;
 |
 */
 
-Route::middleware(['auth:sanctum'])->group(static function(){
-  Route::get('/me', function (Request $request) {
+Route::middleware(['auth:sanctum'])->group(static function () {
+    Route::get('/me', function (Request $request) {
         return $request->user();
     });
 });
 
 
 Route::middleware(['auth:sanctum', 'ability:student'])->prefix('student')->group(static function () {
-  
+
 });
 
 Route::middleware(['auth:sanctum', 'ability:admin'])->prefix('admin')->group(static function () {

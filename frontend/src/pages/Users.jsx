@@ -1,5 +1,3 @@
 export default function Users() {
-    return <>
-              Hi from Userq page
-           </>
+    return <>Hi from User page</>;
 }

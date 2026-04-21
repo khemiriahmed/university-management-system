@@ -29,7 +29,7 @@ class StudentController extends Controller
         $formFields['last_login_date'] = new \DateTime();
         $formFields['password'] = Hash::make($formFields['password']);
         $student = User::create($formFields);
-         $response = new StudentResource($student);
+        $response = new StudentResource($student);
         return response()->json([
             'parent' => $response,
             'message' => __('Student created successfully')
@@ -41,7 +41,7 @@ class StudentController extends Controller
      */
     public function show(StudentParent $studentParent)
     {
-        
+
     }
 
     /**
@@ -54,7 +54,7 @@ class StudentController extends Controller
         $formFields['password'] = Hash::make($formFields['password']);
         $student->update($formFields);
 
-          return response()->json([
+        return response()->json([
             'student' => new StudentResource($student),
             'message' => __('Student updated successfully')
         ]);
@@ -65,8 +65,8 @@ class StudentController extends Controller
      */
     public function destroy(User $student)
     {
-        $student->delete();   
+        $student->delete();
         return new StudentResource($student);
     }
 
-}  
+}

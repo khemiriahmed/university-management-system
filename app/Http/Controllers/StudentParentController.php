@@ -15,7 +15,7 @@ class StudentParentController extends Controller
      * Display a listing of the resource.
      */
     public function index(Request $request)
-    { 
+    {
         $columns = $request->get('columns');
         $parents = !empty($columns) ? StudentParent::all($columns) : StudentParent::all();
         return StudentParentResource::collection($parents);
@@ -31,7 +31,7 @@ class StudentParentController extends Controller
         $formFields['last_login_date'] = new \DateTime();
         $formFields['password'] = Hash::make($formFields['password']);
         $parent = StudentParent::create($formFields);
-         $response = new StudentParentResource($parent);
+        $response = new StudentParentResource($parent);
         return response()->json([
             'parent' => $response,
             'message' => __('Parent created successfully')
@@ -43,7 +43,7 @@ class StudentParentController extends Controller
      */
     public function show(StudentParent $studentParent)
     {
-        
+
     }
 
     /**
@@ -56,7 +56,7 @@ class StudentParentController extends Controller
         $formFields['password'] = Hash::make($formFields['password']);
         $parent->update($formFields);
 
-          return response()->json([
+        return response()->json([
             'parent' => $parent,
             'message' => __('Parent updated successfully')
         ]);

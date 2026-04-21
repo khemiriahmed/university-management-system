@@ -27,7 +27,7 @@ class StoreStudentRequest extends FormRequest
         return [
             'firstname' => 'required|max:50',
             'lastname' => 'required|max:50',
-            'student_parent_id' => Rule::exists(StudentParent::class,'id'),
+            'student_parent_id' => Rule::exists(StudentParent::class, 'id'),
             'date_of_birth' => 'required|date',
             'gender' => ['required', Rule::in(['m', 'f'])],
             'blood_type' => ['required', Rule::enum(BloodEnum::class)],

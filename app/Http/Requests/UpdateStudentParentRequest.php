@@ -24,14 +24,14 @@ class UpdateStudentParentRequest extends FormRequest
     public function rules(): array
     {
         return [
-               'firstname' => 'required|max:50',
+            'firstname' => 'required|max:50',
             'lastname' => 'required|max:50',
             'date_of_birth' => 'required|date',
             'gender' => ['required', Rule::in(['m', 'f'])],
             'blood_type' => ['required', Rule::enum(BloodEnum::class)],
             'address' => 'required|max:255',
-                 'phone' => Rule::unique('student_parents')->ignore($this->route('parent')),
-          'email' => Rule::unique('student_parents')->ignore($this->route('parent')),
+            'phone' => Rule::unique('student_parents')->ignore($this->route('parent')),
+            'email' => Rule::unique('student_parents')->ignore($this->route('parent')),
             'password' => 'required',
         ];
     }

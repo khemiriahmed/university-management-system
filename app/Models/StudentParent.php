@@ -11,20 +11,20 @@ use Laravel\Sanctum\HasApiTokens;
 
 class StudentParent extends Authenticatable
 {
-     use HasApiTokens, HasFactory, Notifiable;
+  use HasApiTokens, HasFactory, Notifiable;
 
 
-      protected $fillable = [
+  protected $fillable = [
     'firstname',
     'lastname',
     'date_of_birth',
-     'last_login_date',
+    'last_login_date',
     'gender',
     'blood_type',
     'address',
     'phone',
     'email',
-     'password'
+    'password'
   ];
   protected $hidden = [
     'password',
@@ -35,13 +35,14 @@ class StudentParent extends Authenticatable
     'created_at',
   ];
 
-    protected $casts = [
+  protected $casts = [
     'date_of_birth' => 'date:Y-m-d',
   ];
 
-    protected $appends = ['role'];
-       public function getRoleAttribute(){
-        return 'parent';
-}
+  protected $appends = ['role'];
+  public function getRoleAttribute()
+  {
+    return 'parent';
+  }
 
 }

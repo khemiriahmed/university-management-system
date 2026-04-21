@@ -1,5 +1,3 @@
 export default function NotFound() {
-    return <>
-              Not Found g
-           </>
+    return <>Not Found</>;
 }

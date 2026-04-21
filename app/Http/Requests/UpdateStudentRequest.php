@@ -27,10 +27,10 @@ class UpdateStudentRequest extends FormRequest
         return [
             'firstname' => 'required|max:50',
             'lastname' => 'required|max:50',
-            'student_parent_id' => Rule::exists(StudentParent::class,'id'),
+            'student_parent_id' => Rule::exists(StudentParent::class, 'id'),
             'date_of_birth' => 'required|date',
             'gender' => ['required', Rule::in(['m', 'f'])],
-            'blood_type' => ['required', Rule::enum(BloodEnum::class)], 
+            'blood_type' => ['required', Rule::enum(BloodEnum::class)],
             'email' => 'required|email|unique:student_parents',
             'password' => 'required',
         ];
